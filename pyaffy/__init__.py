@@ -14,10 +14,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import pkg_resources
+#import pkg_resources
 
 from .process import rma
 
-__version__ = pkg_resources.require('pyaffy')[0].version
+#__version__ = pkg_resources.require('pyaffy')[0].version
 
 __all__ = ['rma']
