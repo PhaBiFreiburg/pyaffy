@@ -73,6 +73,3 @@ docs/_build/
 
 # PyBuilder
 target/
-
-# build artefacts
-*.html
