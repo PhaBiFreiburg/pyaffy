@@ -26,8 +26,8 @@ import collections
 
 import numpy as np
 
-from genometools.expression import quantile_normalize as qnorm
-from genometools.expression import ExpMatrix
+from .genometools.expression import quantile_normalize as qnorm
+from .genometools.expression import ExpMatrix
 
 from .cdfparser import parse_cdf
 from . import celparser
@@ -43,7 +43,7 @@ def rma(
         pm_probes_only = True,
         bg_correct = True,
         quantile_normalize = True,
-        medianpolish = True
+        medianpolish = True,
     ):
     """Perform RMA on a set of samples.
 
@@ -99,7 +99,6 @@ def rma(
         assert isinstance(cel_file, (str, _oldstr))
         assert os.path.isfile(cel_file), \
                 'CEL file "%s" does not exist!' %(cel_file)
-
     assert isinstance(pm_probes_only, bool)
     assert isinstance(bg_correct, bool)
     assert isinstance(quantile_normalize, bool)
@@ -192,10 +191,10 @@ def rma(
             X[i,:] = col_eff + global_eff
             if converged:
                 num_converged += 1
-         
+
         else:
             # simply use median across probes
-            X[i,:] = np.median(Y[cur:(cur+probes.size),:], axis = 0) 
+            X[i,:] = np.median(Y[cur:(cur+probes.size),:], axis = 0)
             #X[i,:] = np.ma.median(X_sub, axis = 0)
 
         cur += probes.size
@@ -206,7 +205,7 @@ def rma(
     if medianpolish:
         logger.debug('Converged: %d / %d (%.1f%%)',
                 num_converged, p, 100 * (num_converged / float(p)))
-    
+
     ### report total time
     t11 = time.time()
     logger.info('Total RMA time: %.1f s.', t11 - t00)
